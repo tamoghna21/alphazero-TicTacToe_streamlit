@@ -191,10 +191,21 @@ if st.session_state.player1 is not None and st.session_state.first_move_played =
 for i in range(3):
     cols = st.columns(3)
     for j in range(3):
-        
-        cols[j].button(st.session_state.board[i][j] or " ", on_click=on_button_click, args=(i, j), key=f'button_{i}_{j}')
+        cols[j].button(st.session_state.board[i][j] or " ", on_click=on_button_click, args=(i, j), key=f'button_{i}_{j}',type="primary")
 
-st.button("Reset Board", on_click=reset_game)
+m = st.markdown("""
+<style>
+div.stButton > button:first-child[kind="primary"] {
+    background-color: #473D3B;
+    color:#ffffff;
+}
+div.stButton > button:first-child[kind="secondary"] {
+    background-color: purple;
+    color:#ffffff;
+}
+</style>""", unsafe_allow_html=True)
+        
+st.button("Reset Board", on_click=reset_game,type="secondary")
 
 st.write("")
 st.write("The AI agent chooses moves based on Monte-Carlo-Tree-Search guided by Actor-Critic Reinforcement Learning Algorithm")
