@@ -64,6 +64,7 @@ def reset_game():
     st.session_state.game = ConnectN(**game_setting)
     st.session_state.end = 0
     st.session_state.first_move_played = 0
+    st.session_state.current_sts_msg = ''
     
     if selected_option == 'You play first':
         st.session_state.player1=None
