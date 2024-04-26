@@ -203,7 +203,7 @@ for i in range(3):
 st.button("Reset Board", on_click=reset_game)
 
 st.write("")
-st.write("The AI agent chooses moves based on Monte-Carlo-Tree-Search guided by an trained Actor-Critic Reinforcement Learning Agent")
+st.write("The AI agent chooses moves based on Monte-Carlo-Tree-Search guided by Actor-Critic Reinforcement Learning Algorithm")
 st.write("The stramlite code is available here: https://github.com/tamoghna21/alphazero-TicTacToe_streamlit")
 st.write("The RL agent training code is available here: https://github.com/tamoghna21/deep-reinforcement-learning-python-pytorch/tree/main/alphazero-TicTacToe")
 st.write("Created by : Tamoghna Das")
