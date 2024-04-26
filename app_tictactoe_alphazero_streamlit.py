@@ -55,6 +55,8 @@ if 'player1' not in st.session_state:
     st.session_state.player1 = None
 if 'player2' not in st.session_state:
     st.session_state.player2 = Policy_Player_MCTS
+if 'current_sts_msg' not in st.session_state:
+    st.session_state.current_sts_msg = ''
     
 def reset_game():
     st.session_state.board = [['' for _ in range(3)] for _ in range(3)]
@@ -69,7 +71,8 @@ def reset_game():
     else:
         st.session_state.player1=Policy_Player_MCTS
         st.session_state.player2=None
-        
+st.header('Play Tic Tac Toe with an AI agent (alphazero)', divider='rainbow')
+st.subheader(st.session_state.current_sts_msg)  
     
 # Define options for radio buttons
 options = ["You play first", "You play second"]
@@ -100,11 +103,13 @@ def on_button_click(i, j):
             st.session_state.board[i][j] = st.session_state.current_player
             # Check for winner
             if check_winner(st.session_state.board, st.session_state.current_player):
-                st.write(f"Player {st.session_state.current_player} wins!")
+                #st.write(f"Player {st.session_state.current_player} wins!")
+                st.session_state.current_sts_msg = f"Player {st.session_state.current_player} wins!"
                 st.session_state.end = 1
                 #reset_game()
             elif all(cell != '' for row in st.session_state.board for cell in row):
-                st.write("It's a draw!")
+                #st.write("It's a draw!")
+                st.session_state.current_sts_msg = "It's a draw!"
                 st.session_state.end = 1
                 #reset_game()
             else:
@@ -128,11 +133,13 @@ def on_button_click(i, j):
                     st.session_state.board[row][col] = st.session_state.current_player
                     # Check for winner
                     if check_winner(st.session_state.board, st.session_state.current_player):
-                        st.write(f"Player {st.session_state.current_player} wins!")
+                        #st.write(f"Player {st.session_state.current_player} wins!")
+                        st.session_state.current_sts_msg = f"Player {st.session_state.current_player} wins!"
                         st.session_state.end = 1
                         #reset_game()
                     elif all(cell != '' for row in st.session_state.board for cell in row):
-                        st.write("It's a draw!")
+                        #st.write("It's a draw!")
+                        st.session_state.current_sts_msg = "It's a draw!"
                         st.session_state.end = 1
                         #reset_game()
                     else:
@@ -157,11 +164,13 @@ if st.session_state.player1 is not None and st.session_state.first_move_played =
         st.session_state.board[row][col] = st.session_state.current_player
         # Check for winner
         if check_winner(st.session_state.board, st.session_state.current_player):
-            st.write(f"Player {st.session_state.current_player} wins!")
+            #st.write(f"Player {st.session_state.current_player} wins!")
+            st.session_state.current_sts_msg = f"Player {st.session_state.current_player} wins!"
             st.session_state.end = 1
             #reset_game()
         elif all(cell != '' for row in st.session_state.board for cell in row):
-            st.write("It's a draw!")
+            #st.write("It's a draw!")
+            st.session_state.current_sts_msg = "It's a draw!"
             st.session_state.end = 1
             #reset_game()
         else:
@@ -170,7 +179,8 @@ if st.session_state.player1 is not None and st.session_state.first_move_played =
     
     #if (st.session_state.end == 1):
         #reset_game()
-        
+
+
 # Display the Tic Tac Toe board
 for i in range(3):
     cols = st.columns(3)
