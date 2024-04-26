@@ -73,9 +73,6 @@ def reset_game():
         st.session_state.player1=Policy_Player_MCTS
         st.session_state.player2=None
         
-#st.markdown('<style>body{background-color: Blue;}</style>',unsafe_allow_html=True)
-
-backgroundColor = "#F0F0F0"
 
 st.header('Play Tic Tac Toe with an AI agent (alphazero)', divider='rainbow')
 st.subheader(st.session_state.current_sts_msg)  
@@ -191,7 +188,7 @@ if st.session_state.player1 is not None and st.session_state.first_move_played =
 for i in range(3):
     cols = st.columns(3)
     for j in range(3):
-        cols[j].button(st.session_state.board[i][j] or " ", on_click=on_button_click, args=(i, j), key=f'button_{i}_{j}',type="primary")
+        cols[j].button(st.session_state.board[i][j] or "  ", on_click=on_button_click, args=(i, j), key=f'button_{i}_{j}',type="primary")
 
 m = st.markdown("""
 <style>
