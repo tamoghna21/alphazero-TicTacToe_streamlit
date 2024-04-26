@@ -68,7 +68,7 @@ def process_policy(policy, game):
     
     # we add a negative sign because when deciding next move,
     # the current player is the previous player making the move
-    return game.available_moves(), tinv(prob)[mask].view(-1), v.squeeze().squeeze()#reverse rot/reflection is applied on prob
+    return game.available_moves(), tinv(prob)[mask].reshape(-1), v.squeeze().squeeze()#reverse rot/reflection is applied on prob
 
 class Node:
     def __init__(self, game, mother=None, prob=torch.tensor(0., dtype=torch.float)):

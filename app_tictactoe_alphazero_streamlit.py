@@ -17,6 +17,9 @@ import random
 policy_alphazero = Policy()
 policy_alphazero.load_state_dict(torch.load('Policy_alphazero_tictactoe.pth')) 
 
+button_width = 200
+button_height = 100
+
 def Policy_Player_MCTS(game):
     tree = MCTSwithRL.Node(copy(game))
     for _ in range(50): # explore the tree 50 steps #50
@@ -60,7 +63,7 @@ def reset_game():
     st.session_state.end = 0
     st.session_state.first_move_played = 0
     
-    if selected_option == 'X:You,O:AI Agent':
+    if selected_option == 'You play first':
         st.session_state.player1=None
         st.session_state.player2=Policy_Player_MCTS
     else:
@@ -69,10 +72,10 @@ def reset_game():
         
     
 # Define options for radio buttons
-options = ['X:You,O:AI Agent', 'X:AI Agent,O:You']
+options = ["You play first", "You play second"]
 
 # Display radio buttons
-selected_option = st.radio("Select an option(X plays first):", options)
+selected_option = st.radio("Select an option:", options)
     
 def check_winner(board, player):
     # Check horizontal, vertical and diagonal conditions
@@ -172,6 +175,19 @@ if st.session_state.player1 is not None and st.session_state.first_move_played =
 for i in range(3):
     cols = st.columns(3)
     for j in range(3):
+        button_css = f"""
+            .stButton button {{
+            width: {button_width}px;
+            height: {button_height}px;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            background-color: #F0F2F7;
+            border: none;
+            cursor: pointer;
+          }}
+        """
+        #st.write(f'<style>{button_css}</style>', unsafe_allow_html=True)
         cols[j].button(st.session_state.board[i][j] or " ", on_click=on_button_click, args=(i, j), key=f'button_{i}_{j}')
 
 st.button("Reset Board", on_click=reset_game)
