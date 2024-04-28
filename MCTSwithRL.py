@@ -1,9 +1,7 @@
 import numpy as np
-#import matplotlib.pyplot as plt
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-#import matplotlib.animation as animation
 from copy import copy
 from math import *
 import random
@@ -68,7 +66,7 @@ def process_policy(policy, game):
     
     # we add a negative sign because when deciding next move,
     # the current player is the previous player making the move
-    return game.available_moves(), tinv(prob)[mask].reshape(-1), v.squeeze().squeeze()#reverse rot/reflection is applied on prob
+    return game.available_moves(), tinv(prob)[mask].view(-1), v.squeeze().squeeze()#reverse rot/reflection is applied on prob
 
 class Node:
     def __init__(self, game, mother=None, prob=torch.tensor(0., dtype=torch.float)):
@@ -118,10 +116,6 @@ class Node:
 
         children = { tuple(a):Node(g, self, p) for a,g,p in zip(actions, games, probs) }
         #print(children)
-        #for a,c in children.items():
-            #print("a: ",a)
-            #print("c.U: ", c.U)
-            #print("c.game.state: ", c.game.state)
         self.children = children
         
     def explore(self, policy):
@@ -141,12 +135,12 @@ class Node:
             while current.children and current.outcome is None:
             
                 children = current.children
-                max_U = max(c.U for c in children.values())# values() method of a dictionary returns only the values(not the keys) of
+                max_U = max(node.U for node in children.values())# values() method of a dictionary returns only the values(not the keys) of
                                                      # a dictionary, as a list.
-                                                     # Therefore, c.U is actually a child node.U
+                                                     # Therefore, node.U is actually a child node.U
                 #print("current max_U ", max_U) 
-                actions = [ a for a,c in children.items() if c.U == max_U ]
-            
+                actions = [ a for a,node in children.items() if node.U == max_U ]
+                
                 action = random.choice(actions)            
                 #print("chosen action: ",action)
             
@@ -212,10 +206,10 @@ class Node:
 
         
         # if there are winning moves, just output those
-        max_U = max(c.U for c in children.values())
+        max_U = max(node.U for node in children.values())
 
         if max_U == float("inf"):
-            prob = torch.tensor([ 1.0 if c.U == float("inf") else 0 for c in children.values()], device=device)
+            prob = torch.tensor([ 1.0 if node.U == float("inf") else 0 for node in children.values()], device=device)
             
         else:
             # divide things by maxN for numerical stability
