@@ -17,8 +17,23 @@ import random
 policy_alphazero = Policy()
 policy_alphazero.load_state_dict(torch.load('Policy_alphazero_tictactoe.pth')) 
 
-button_width = 200
-button_height = 100
+
+st.markdown("""
+            <style>
+                div[data-testid="column"] {
+                    width: 40px;
+                    flex: unset;
+                }
+                div[data-testid="column"] * {
+                    width: 40px;
+                }
+                .stButton>button {
+                    border: 1px solid #000000;
+                    margin: 5px;
+                    
+                }
+            </style>
+            """, unsafe_allow_html=True)
 
 def Policy_Player_MCTS(game):
     tree = MCTSwithRL.Node(copy(game))
@@ -119,35 +134,35 @@ def on_button_click(i, j):
                 # Switch player
                 st.session_state.current_player = 'O' if st.session_state.current_player == 'X' else 'X'
     
-        if (st.session_state.end == 0):
-            if st.session_state.player1 is not None or st.session_state.player2 is not None:
-                succeed = False
-                player = st.session_state.game.player
-                while not succeed:
-                    if st.session_state.game.player == 1:
-                        loc = st.session_state.player1(st.session_state.game)
-                    else:
-                        loc = st.session_state.player2(st.session_state.game)
-                    succeed = st.session_state.game.move(loc)
-                row,col=loc
+            if (st.session_state.end == 0):
+                if st.session_state.player1 is not None or st.session_state.player2 is not None:
+                    succeed = False
+                    player = st.session_state.game.player
+                    while not succeed:
+                        if st.session_state.game.player == 1:
+                            loc = st.session_state.player1(st.session_state.game)
+                        else:
+                            loc = st.session_state.player2(st.session_state.game)
+                        succeed = st.session_state.game.move(loc)
+                    row,col=loc
         
-                # Place the player's mark on the board
-                if st.session_state.board[row][col] == '':
-                    st.session_state.board[row][col] = st.session_state.current_player
-                    # Check for winner
-                    if check_winner(st.session_state.board, st.session_state.current_player):
-                        #st.write(f"Player {st.session_state.current_player} wins!")
-                        st.session_state.current_sts_msg = f"Player {st.session_state.current_player} wins!"
-                        st.session_state.end = 1
-                        #reset_game()
-                    elif all(cell != '' for row in st.session_state.board for cell in row):
-                        #st.write("It's a draw!")
-                        st.session_state.current_sts_msg = "It's a draw!"
-                        st.session_state.end = 1
-                        #reset_game()
-                    else:
-                        # Switch player
-                        st.session_state.current_player = 'O' if st.session_state.current_player == 'X' else 'X'
+                    # Place the player's mark on the board
+                    if st.session_state.board[row][col] == '':
+                        st.session_state.board[row][col] = st.session_state.current_player
+                        # Check for winner
+                        if check_winner(st.session_state.board, st.session_state.current_player):
+                            #st.write(f"Player {st.session_state.current_player} wins!")
+                            st.session_state.current_sts_msg = f"Player {st.session_state.current_player} wins!"
+                            st.session_state.end = 1
+                            #reset_game()
+                        elif all(cell != '' for row in st.session_state.board for cell in row):
+                            #st.write("It's a draw!")
+                            st.session_state.current_sts_msg = "It's a draw!"
+                            st.session_state.end = 1
+                            #reset_game()
+                        else:
+                            # Switch player
+                            st.session_state.current_player = 'O' if st.session_state.current_player == 'X' else 'X'
             
     #if (st.session_state.end == 1):
         #reset_game()
@@ -185,22 +200,12 @@ if st.session_state.player1 is not None and st.session_state.first_move_played =
 
 
 # Display the Tic Tac Toe board
+cols= st.columns(3,gap='small')
 for i in range(3):
-    cols = st.columns(3)
     for j in range(3):
-        cols[j].button(st.session_state.board[i][j] or "  ", on_click=on_button_click, args=(i, j), key=f'button_{i}_{j}',type="primary")
+        cols[j].button(label=st.session_state.board[i][j] or "  ",on_click=on_button_click, args=(i, j), key=f'button_{i}_{j}',type="primary")
 
-m = st.markdown("""
-<style>
-div.stButton > button:first-child[kind="primary"] {
-    background-color: #473D3B;
-    color:#ffffff;
-}
-div.stButton > button:first-child[kind="secondary"] {
-    background-color: purple;
-    color:#ffffff;
-}
-</style>""", unsafe_allow_html=True)
+
         
 st.button("Reset Board", on_click=reset_game,type="secondary")
 
