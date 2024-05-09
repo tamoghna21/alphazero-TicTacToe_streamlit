@@ -17,23 +17,30 @@ import random
 policy_alphazero = Policy()
 policy_alphazero.load_state_dict(torch.load('Policy_alphazero_tictactoe.pth')) 
 
-
-st.markdown("""
+def get_button_color_css(color):
+    return f"""
             <style>
-                div[data-testid="column"] {
+                div[data-testid="column"] {{
                     width: 40px;
                     flex: unset;
-                }
-                div[data-testid="column"] * {
+                }}
+                div[data-testid="column"] * {{
                     width: 40px;
-                }
-                .stButton>button {
+                }}
+                .stButton>button["primary"] {{
                     border: 1px solid #000000;
                     margin: 5px;
+                    color: {color};  /* Change this based on your logic */
+                }}
+                .stButton>button["secondary"] {{
+                    border: 2px solid #000000;
+                    margin: 5px;
                     
-                }
+                }}
             </style>
-            """, unsafe_allow_html=True)
+            """
+label_color = 'white'
+st.markdown(get_button_color_css(label_color), unsafe_allow_html=True)
 
 def Policy_Player_MCTS(game):
     tree = MCTSwithRL.Node(copy(game))
