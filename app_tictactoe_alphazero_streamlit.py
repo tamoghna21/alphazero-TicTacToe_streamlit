@@ -117,7 +117,7 @@ st.header('Play Tic Tac Toe with an AI agent (alphazero)', divider='rainbow')
 
 # Define options for radio buttons
 options = ["You play first", "You play second"]
-options_board = ["3x3 board", "6x6 board (pie rule on)"]
+options_board = ["3x3 board", "6x6 board (*pie rule on)"]
 
 selected_option = st.radio("Select an option:", options=options, horizontal=True)
 selected_board_option = st.radio("Select board:",options=options_board, horizontal = True)
@@ -265,8 +265,7 @@ for i in range(num_cols):
 
 st.write(st.session_state.current_pierule_msg)        
 st.button("Reset Board", on_click=reset_game,type="secondary")
-
-
+st.write("*pie rule: The second player may override first player's move only for the first move")
 st.write("The AI agent plays moves based on Monte-Carlo-Tree-Search guided by Actor-Critic Reinforcement Learning Algorithm(alphazero")
 st.write("The stramlite code is available here: https://github.com/tamoghna21/alphazero-TicTacToe_streamlit")
 st.write("The RL agent training code is available here: https://github.com/tamoghna21/deep-reinforcement-learning-python-pytorch/tree/main/alphazero-TicTacToe")
