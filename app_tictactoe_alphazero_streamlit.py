@@ -35,13 +35,13 @@ def get_button_color_css():
                 .stButton>button["primary"] {{
                     border: 1px solid #FF0000;
                     margin: 5px;
-                    color: black;
+                    
                 }}
                 .stButton>button["secondary"] {{
                     border: 2px solid #FF0000;
                     margin: 5px;
                     outline: none;
-                    color: #778899;
+                    
                 }}
             </style>
             """
@@ -267,7 +267,7 @@ st.write(st.session_state.current_pierule_msg)
 st.button("Reset Board", on_click=reset_game,type="secondary")
 
 
-st.write("The AI agent chooses moves based on Monte-Carlo-Tree-Search guided by Actor-Critic Reinforcement Learning Algorithm")
+st.write("The AI agent plays moves based on Monte-Carlo-Tree-Search guided by Actor-Critic Reinforcement Learning Algorithm(alphazero")
 st.write("The stramlite code is available here: https://github.com/tamoghna21/alphazero-TicTacToe_streamlit")
 st.write("The RL agent training code is available here: https://github.com/tamoghna21/deep-reinforcement-learning-python-pytorch/tree/main/alphazero-TicTacToe")
 st.write("Created by : Tamoghna Das")
