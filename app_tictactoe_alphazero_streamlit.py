@@ -117,7 +117,7 @@ st.header('Play Tic Tac Toe with an AI agent (alphazero)', divider='rainbow')
 
 # Define options for radio buttons
 options = ["You play first", "You play second"]
-options_board = ["3x3 board", "6x6 board (*pie rule on)"]
+options_board = ["3x3 board", "6x6 board, 4 in a line is a win(*pie rule on)"]
 
 selected_option = st.radio("Select an option:", options=options, horizontal=True)
 selected_board_option = st.radio("Select board:",options=options_board, horizontal = True)
