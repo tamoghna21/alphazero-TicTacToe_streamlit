@@ -267,8 +267,8 @@ st.write(st.session_state.current_pierule_msg)
 st.button("Reset Board", on_click=reset_game,type="secondary")
 st.write("*pie rule: The second player may override first player's move only for the first move")
 st.write("The AI agent plays moves based on Monte-Carlo-Tree-Search guided by Actor-Critic Reinforcement Learning Algorithm(alphazero")
-st.write("The stramlite code is available here: https://github.com/tamoghna21/alphazero-TicTacToe_streamlit")
-st.write("The RL agent training code is available here: https://github.com/tamoghna21/deep-reinforcement-learning-python-pytorch/tree/main/alphazero-TicTacToe")
+st.write("The stramlite code is available [here in github](https://github.com/tamoghna21/alphazero-TicTacToe_streamlit)")
+st.write("The Reinforcement Learning agent training code is available [here in github](https://github.com/tamoghna21/deep-reinforcement-learning-python-pytorch/tree/main/alphazero-TicTacToe)")
 st.write("Created by : Tamoghna Das")
 
 
