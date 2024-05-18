@@ -35,7 +35,7 @@ def get_button_color_css():
                 .stButton>button["primary"] {{
                     border: 1px solid #FF0000;
                     margin: 5px;
-                    color: white;
+                    color: black;
                 }}
                 .stButton>button["secondary"] {{
                     border: 2px solid #FF0000;
@@ -260,7 +260,7 @@ else:
 cols= st.columns(num_cols,gap='small')
 for i in range(num_cols):
     for j in range(num_cols):
-        cols[j].button(label=st.session_state.board[i][j] or "  ",on_click=on_button_click, args=(i, j), key=f'button_{i}_{j}',type="secondary")
+        cols[j].button(label=st.session_state.board[i][j] or "  ",on_click=on_button_click, args=(i, j), key=f'button_{i}_{j}',type="primary")
 
 
 st.write(st.session_state.current_pierule_msg)        
