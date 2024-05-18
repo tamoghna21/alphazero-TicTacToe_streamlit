@@ -188,7 +188,7 @@ def on_button_click(i, j):
                 st.session_state.current_sts_msg = "It's a draw!"
                 st.session_state.end = 1
             else:
-                st.session_state.current_sts_msg = f"Player {st.session_state.current_player} wins!"
+                st.session_state.current_sts_msg = f"*Player {st.session_state.current_player} wins!*:100:"
                 st.session_state.end = 1
             
             # Automatic move generation by the agent
@@ -221,7 +221,7 @@ def on_button_click(i, j):
                             st.session_state.current_sts_msg = "It's a draw!"
                             st.session_state.end = 1
                         else:
-                            st.session_state.current_sts_msg = f"Player {st.session_state.current_player} wins!"
+                            st.session_state.current_sts_msg = f"*Player {st.session_state.current_player} wins!*:100:"
                             st.session_state.end = 1
                                            
 
@@ -247,7 +247,7 @@ if st.session_state.player1 is not None and st.session_state.first_move_played =
             st.session_state.current_sts_msg = "It's a draw!"
             st.session_state.end = 1
         else:
-            st.session_state.current_sts_msg = f"Player {st.session_state.current_player} wins!"
+            st.session_state.current_sts_msg = f"*Player {st.session_state.current_player} wins!*:100:"
             st.session_state.end = 1
             
         
@@ -266,7 +266,7 @@ for i in range(num_cols):
 st.write(st.session_state.current_pierule_msg)        
 st.button("Reset Board", on_click=reset_game,type="secondary")
 st.write("*pie rule: The second player may override first player's move only for the first move")
-st.write("The AI agent plays moves based on Monte-Carlo-Tree-Search guided by Actor-Critic Reinforcement Learning Algorithm(alphazero")
+st.write("The AI agent plays moves based on Monte-Carlo-Tree-Search guided by Actor-Critic Reinforcement Learning Algorithm(alphazero)")
 st.write("The stramlite code is available [here in github](https://github.com/tamoghna21/alphazero-TicTacToe_streamlit)")
 st.write("The Reinforcement Learning agent training code is available [here in github](https://github.com/tamoghna21/deep-reinforcement-learning-python-pytorch/tree/main/alphazero-TicTacToe)")
 st.write("Created by : Tamoghna Das")
