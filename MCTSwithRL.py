@@ -62,7 +62,8 @@ def process_policy(policy, game):
     prob, v = policy(input)#probs contains probabilities for all the 9 actions, but unavailable moves would have 0 probability
     #print('output from the NN - prob: ', prob)
     #print('output from the NN - v: ', v)
-    mask = torch.tensor(game.available_mask())# This is used to remove the unavailable moves from prob
+    #mask = torch.tensor(game.available_mask())# This is used to remove the unavailable moves from prob
+    mask = torch.from_numpy(game.available_mask())# This is used to remove the unavailable moves from prob
     
     # we add a negative sign because when deciding next move,
     # the current player is the previous player making the move
