@@ -222,4 +222,4 @@ class ConnectN:
 
      def available_mask(self):
           #return (np.abs(self.state) != 1).astype(np.uint8)
-          return (np.abs(self.state) != 1).astype(bool)
+          return (np.abs(self.state) != 1)
