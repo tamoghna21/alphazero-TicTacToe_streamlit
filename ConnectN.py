@@ -221,4 +221,5 @@ class ConnectN:
           return indices[np.abs(self.state) != 1]
 
      def available_mask(self):
-          return (np.abs(self.state) != 1).astype(np.uint8)
+          #return (np.abs(self.state) != 1).astype(np.uint8)
+          return (np.abs(self.state) != 1).astype(bool)
